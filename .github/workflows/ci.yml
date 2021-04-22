@@ -26,25 +26,28 @@ jobs:
     # 打印环境变量
     - name: print env
       run: printenv
+    # 打印事件变量 event
+    - name: print event
+      run: more /home/runner/work/_temp/_github_workflow/event.json
      
-    # 发送钉钉消息
-    - name: build success
-      if: ${{ success() }}
-      uses: fifsky/dingtalk-action@master
-      with:
-        url: https://oapi.dingtalk.com/robot/send?access_token=这里写钉钉机器人的token
-        type: markdown
-        content: |
-          # 💯👨‍💻 Success 🎉🎉🎉
-          > Maven Build of [# ${{ env.PR_TITLE }}](${{ env.PR_URL }}) by ${{ env.PR_USER }} success
-          > ^_^ from github action message 
-    - name: maven build failure
-      if: ${{ failure() }}
-      uses: fifsky/dingtalk-action@master
-      with:
-        url: https://oapi.dingtalk.com/robot/send?access_token=${{ env.DING_TOKEN}}如果是公有项目则应该在github项目中依次点击settings -> secret 添加一个DING_TOKEN，并设置为自己的钉钉机器人token
-        type: markdown
-        content: |
-          # 💤🤷‍♀️ failure 🙅‍♂️💣
-          > Maven Build of [# ${{ env.PR_TITLE }}](${{ env.PR_URL }}) by ${{ env.PR_USER }} failure
-          > (⋟﹏⋞)   from github action message
+    # # 发送钉钉消息
+    # - name: build success
+    #   if: ${{ success() }}
+    #   uses: fifsky/dingtalk-action@master
+    #   with:
+    #     url: https://oapi.dingtalk.com/robot/send?access_token=这里写钉钉机器人的token
+    #     type: markdown
+    #     content: |
+    #       # 💯👨‍💻 Success 🎉🎉🎉
+    #       > Maven Build of [# ${{ env.PR_TITLE }}](${{ env.PR_URL }}) by ${{ env.PR_USER }} success
+    #       > ^_^ from github action message 
+    # - name: maven build failure
+    #   if: ${{ failure() }}
+    #   uses: fifsky/dingtalk-action@master
+    #   with:
+    #     url: https://oapi.dingtalk.com/robot/send?access_token=${{ env.DING_TOKEN}}如果是公有项目则应该在github项目中依次点击settings -> secret 添加一个DING_TOKEN，并设置为自己的钉钉机器人token
+    #     type: markdown
+    #     content: |
+    #       # 💤🤷‍♀️ failure 🙅‍♂️💣
+    #       > Maven Build of [# ${{ env.PR_TITLE }}](${{ env.PR_URL }}) by ${{ env.PR_USER }} failure
+    #       > (⋟﹏⋞)   from github action message

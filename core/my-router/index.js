@@ -25,8 +25,14 @@ constructor(option){
     window.addEventListener('load', this.onHashChange.bind(this))
     // 拿到路由表 -- this.$options.routes
     this.routeMap = {}
+    // 生成路由映射表，以及解决路由嵌套
     option.routes.forEach(route => {
       this.routeMap[route.path] = route
+      if(route.children) {
+        route.children.forEach(child => {
+          this.routeMap[`${route.path}${child.path}`] = child
+        })
+      }
     })
 
     // url和对应的组件能拿到了，怎么渲染component呢？
@@ -35,6 +41,14 @@ constructor(option){
   onHashChange() {
     console.log('hash-url-change', window.location.hash)
     this.current = window.location.hash.slice(1)
+  }
+  push(path) {
+    console.log('route', path)
+    let route = {}
+    if(typeof path === 'string') {
+      route = { path }
+    }
+    this.current = route.path
   }
 }
 

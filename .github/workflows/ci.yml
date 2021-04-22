@@ -29,6 +29,16 @@ jobs:
     # 打印事件变量 event
     - name: print event
       run: more /home/runner/work/_temp/_github_workflow/event.json
+
+    - name: WeChat Work notification by text
+      uses: chf007/action-wechat-work@master
+      env:
+        WECHAT_WORK_BOT_WEBHOOK: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=f93956cb-6016-40c1-8640-c9c10adc9fed
+      with:
+        msgtype: ${{ env }}
+        content: 广州今日天气：29度，大部分多云，降雨概率：60%
+        mentioned_list: '["wangqing","@all"]'
+        mentioned_mobile_list: '["13800001111","@all"]'
      
     # # 发送钉钉消息
     # - name: build success

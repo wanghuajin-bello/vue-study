@@ -35,7 +35,7 @@ jobs:
       env:
         WECHAT_WORK_BOT_WEBHOOK: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=f93956cb-6016-40c1-8640-c9c10adc9fed
       with:
-        msgtype: ${{ env }}
+        msgtype: text
         content: 广州今日天气：29度，大部分多云，降雨概率：60%
         mentioned_list: '["wangqing","@all"]'
         mentioned_mobile_list: '["13800001111","@all"]'

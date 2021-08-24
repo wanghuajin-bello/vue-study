@@ -1,1 +1,32 @@
+name: Merge pre-master
 
+on:
+  # 推送代码后触发
+  push:
+    branches:
+      - master
+  # 定时任务触发，使用 cron 规则，这里默认一小时执行一次
+#   schedule:
+#     - cron: '0 * * * *'
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Merge origin pre-master
+        run: |
+          # 使用自己的用户名替换 username
+          git config --global user.name 'username'
+          git config --global user.email 'username@users.noreply.github.com'
+
+          git pull --unshallow
+
+          # 自行替换要同步的上游仓库地址
+          # git remote add upstream https://github.com/upstream/upstream.git
+          # git fetch upstream
+
+          # 可以自定义要同步的分支
+          git checkout -b develop origin/develop
+          git merge --no-edit origin/master
+          git push origin develop

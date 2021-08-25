@@ -12,7 +12,7 @@ yarn serve
 
 ### Compiles and minifies for production
 ```
-yarn buildsadsadsa
+yarn buildsadsadsa12121
 ```
 sdads
 ### Lints and fixes files

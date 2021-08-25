@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print env
-      run: printenv
+        run: print env
       - uses: actions/checkout@v2
       - name: Merge origin pre-master
         run: |

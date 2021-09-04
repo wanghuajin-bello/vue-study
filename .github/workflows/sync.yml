@@ -8,28 +8,19 @@ on:
   # 定时任务触发，使用 cron 规则，这里默认一小时执行一次
 #   schedule:
 #     - cron: '0 * * * *'
-
+permissions: write-all
 jobs:
   merge:
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v2
-        with:
-          user_name: ${{ secrets.USER_NAME }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Merge origin pre-master
+      - name: Merge origin develop
         run: |
-          # 使用自己的用户名替换 username
-          git config --global user.name 'wanghuajin'
-          git config --global user.email 'wanghuajin@belloai.com'
-
-          git pull --unshallow
-
-          # 自行替换要同步的上游仓库地址
-          # git remote add upstream https://github.com/upstream/upstream.git
-          # git fetch upstream
-
-          # 可以自定义要同步的分支
-          git checkout -b develop origin/develop
-          git merge --no-edit origin/master
-          git push origin develop
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "content-type: application/json" \
+          -H "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/wanghuajin-bello/vue-study/merges \
+          -d '{"base":"develop","head":"master"}'

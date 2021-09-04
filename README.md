@@ -17,7 +17,7 @@ yarn buildsadsadsa12121
 sdads
 ### Lints and fixes files
 ```
-yarn lint
+yarn lint1111
 ```
 
 ### Customize configuration

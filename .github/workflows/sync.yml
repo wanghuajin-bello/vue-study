@@ -30,6 +30,6 @@ jobs:
           # git fetch upstream
 
           # 可以自定义要同步的分支
-          git checkout -b develop origin/develop
+          git checkout -b pre-master origin/pre-master
           git merge --no-edit origin/master
-          git push origin develop
+          git push origin pre-master

@@ -19,17 +19,10 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Merge origin pre-master
         run: |
-          # 使用自己的用户名替换 username
-          git config --global user.name 'wanghuajin'
-          git config --global user.email 'wanghuajin@belloai.com'
-
-          git pull --unshallow
-
-          # 自行替换要同步的上游仓库地址
-          # git remote add upstream https://github.com/upstream/upstream.git
-          # git fetch upstream
-
-          # 可以自定义要同步的分支
-          git checkout -b pre-master origin/pre-master
-          git merge --no-edit origin/master
-          git push origin pre-master
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "content-type: application/json" \
+          -H "authorization: Bearer ${{ secrets.ACCESS_TOKEN }}" \
+          https://api.github.com/repos/threfo/btp_frontend/merges \
+          -d '{"base":"pre-master","head":"master"}'

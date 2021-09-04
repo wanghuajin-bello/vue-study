@@ -24,8 +24,8 @@ jobs:
         echo PR_USER=$(jq --raw-output .pull_request.user.login "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
     
     # 打印环境变量
-    - name: print env
-      run: printenv
+    - name: print secrets
+      run: printsecrets
     # 打印事件变量 event
     - name: print event
       run: more /home/runner/work/_temp/_github_workflow/event.json
